@@ -39,11 +39,110 @@ src/
 
 ## 🧰 Custom Hook – `useApi.js`
 
-Handles all API requests using Axios.
+A reusable React hook to handle all API requests using Axios, with built-in loading and error state management.
+
+---
+
+### 🔗 Usage
 
 ```js
-const { sendRequest, loading, error } = useApi();
+const { sendRequest, loading, error, data } = useApi();
 ```
+
+You can then use it like:
+
+```js
+const fetchStudents = async () => {
+  const result = await sendRequest({
+    url: "/students",
+    method: "GET",
+  });
+
+  if (result) {
+    console.log("Fetched data:", result);
+  }
+};
+```
+
+---
+
+### 📦 Features
+
+- ✅ Centralized API logic using Axios  
+- ✅ Handles `loading` state automatically  
+- ✅ Captures and exposes any `error` messages  
+- ✅ Supports dynamic HTTP methods and request body  
+- ✅ Clean abstraction to keep components simple  
+
+---
+
+### 🛠️ Function Signature
+
+```js
+await sendRequest({
+  url: "/your-endpoint",     // required
+  method: "POST",            // optional (default: GET)
+  body: { name: "John" },    // optional
+});
+```
+
+---
+
+### 🧠 Internal Logic Notes
+
+```js
+/**
+ * ✅ BASE_URL + url: Combined using template literals
+ *    → `${BASE_URL}${url}` results in full request path like "http://localhost:8080/students"
+ * 
+ * ✅ data: body (not `${body}`) — body is passed as an object, not a string
+ *    → `${body}` would result in "[object Object]" and break backend parsing
+ * 
+ * ✅ error?.response?.data?.message:
+ *    → This safely accesses backend-sent error messages
+ *    → If no backend message, falls back to generic `error.message`
+ * 
+ * ✅ Optional chaining (?.):
+ *    → Prevents crash if `error.response` or `data` is undefined
+ * 
+ * 🔁 Returns:
+ *    - data: response from backend
+ *    - loading: true/false during the request
+ *    - error: string if something went wrong
+ *    - sendRequest: async function to make API call
+ */
+```
+
+---
+
+### 🔄 Hook Return Values
+
+| Name          | Type      | Description                                  |
+|---------------|-----------|----------------------------------------------|
+| `data`        | `any`     | Response data from the API                   |
+| `loading`     | `boolean` | True while request is in progress            |
+| `error`       | `string`  | Error message if the request fails           |
+| `sendRequest` | `function`| Function to trigger the API call             |
+
+---
+
+### 📁 Example API Call Response
+
+Assuming your backend returns:
+
+```json
+{
+  "id": "1",
+  "name": "Riddle",
+  "course": "CS"
+}
+```
+
+The `data` state will contain the same object and can be rendered or used as needed.
+
+---
+
+> ✅ This hook is perfect for simple REST APIs, reduces repetition, and improves readability in React components.
 
 ### Example Usage:
 

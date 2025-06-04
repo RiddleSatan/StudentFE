@@ -14,7 +14,7 @@ const Home = () => {
 
   useEffect(() => {
     fetchStudents();
-  }, []);
+  });
 
   const fetchStudents = async () => {
     const data = await sendRequest({ url: "/students", method: "GET" });
