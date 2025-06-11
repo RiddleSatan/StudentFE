@@ -7,6 +7,7 @@ import { useMyContext } from './context/useMyContext'
 import useApi from '../hooks/infoStudent';
 import UpdateStudent from './components/UpdateStudent';
 import { Outlet } from "react-router";
+import { Bounce, ToastContainer } from 'react-toastify';
 
 
 function App() {
@@ -38,6 +39,19 @@ function App() {
   return (
     <>
    <Outlet/>
+   <ToastContainer
+position="bottom-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick={false}
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="dark"
+transition={Bounce}
+/>
     </>
   )
 }

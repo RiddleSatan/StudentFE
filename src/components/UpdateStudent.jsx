@@ -3,6 +3,7 @@ import { CircleGauge, Edit3, Lock } from 'lucide-react';
 import { useMyContext } from '../context/useMyContext';
 import useApi from '../../hooks/infoStudent';
 import { useNavigate, useParams } from 'react-router';
+import { Bounce, toast } from 'react-toastify';
 
 const UpdateStudent = () => {
   const {setEdit,edit}=useMyContext();
@@ -58,6 +59,17 @@ const UpdateStudent = () => {
         method:"PUT",
         body:edit});
      console.log(response); 
+     toast.success('Update Successful!🥂', {
+position: "bottom-right",
+autoClose: 5000,
+hideProgressBar: false,
+closeOnClick: false,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+theme: "dark",
+transition: Bounce,
+});
      navigate('/');
    } catch (error) {
     console.error("Server Error: ",error)
