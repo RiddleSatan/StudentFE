@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8080";
+const BASE_URL = "http://localhost:8080/students/";
 
 const useApi = () => {
   const [data, setData] = useState(null);
