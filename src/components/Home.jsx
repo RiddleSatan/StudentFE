@@ -11,6 +11,7 @@ const Home = () => {
     age: "",
     email: "",
     course: "",
+    accountNo:""
   });
   const navigate = useNavigate();
 
@@ -49,24 +50,32 @@ const Home = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setStudent({ ...student, [name]: value });
+    setStudent({ ...student, [name]:value });
+
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
 
+    e.preventDefault();
+        console.log("this is student:",student)
     if (!student.name || !student.email || !student.age || !student.course) {
       return;
+    }
+
+    const studentData={
+      ...student,
+      age:Number(student.age),
+      accountNo:Number(student.accountNo)
     }
     
     const created = await sendRequest({
       url: "add",
       method: "POST",
-      body: student,
+      body: studentData,  
     });
     if (created) {
       setValue((prev) => [...prev, created]);
-      setStudent({ name: "", age: "", email: "", course: "" });
+      setStudent({ name: "", age: "", email: "", course: "",accountNo:""});
     }
   };
 
@@ -138,6 +147,22 @@ const Home = () => {
           value={student.age}
           onChange={handleChange}
           placeholder="Enter age"
+          required
+          className="w-full p-4 rounded-lg bg-black border border-gray-600 text-white placeholder-gray-400 focus:ring-2 focus:ring-white"
+        />
+      </div>
+
+       {/* AccountNo. */}   
+       <div className="space-y-2">
+        <label className="text-sm font-medium text-gray-300">AccountNo.</label>
+        <input
+          name="accountNo"
+          type="number"
+          min="1"
+          max="100"
+          value={student.accountNo}
+          onChange={handleChange}
+          placeholder="Enter Your Account No."
           required
           className="w-full p-4 rounded-lg bg-black border border-gray-600 text-white placeholder-gray-400 focus:ring-2 focus:ring-white"
         />
