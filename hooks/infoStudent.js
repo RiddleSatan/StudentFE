@@ -23,11 +23,17 @@ const useApi = () => {
     });
 
     setData(response.data);
-    return response.data; // 🔥 This must be here to return created student
-  } catch (err) {
-    setError(err?.response?.data?.message || err.message || "Something went wrong");
-    return null; // Prevents frontend crashes
-  } finally {
+    return response.data; 
+  }catch (err) {
+  if (err.response && err.response.status === 400) {
+    console.log("Add student error response:", err.response.data);
+    setError(err.response.data); 
+  } else {
+    setError({ general: "Something went wrong" }); 
+  }
+  return null;
+}
+ finally {
     setLoading(false);
   }
 };

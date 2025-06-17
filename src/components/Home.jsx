@@ -73,6 +73,7 @@ const Home = () => {
       method: "POST",
       body: studentData,  
     });
+    console.log("This is the error :",error);
     if (created) {
       setValue((prev) => [...prev, created]);
       setStudent({ name: "", age: "", email: "", course: "",accountNo:""});
@@ -205,11 +206,16 @@ const Home = () => {
     </div>
 
     {/* Error */}
-    {error && (
-      <div className="mb-6 p-4 bg-red-800/10 border border-red-700 rounded-xl">
-        <p className="text-red-400">Error: {error}</p>
-      </div>
-    )}
+  {error && (
+  <div className="mb-6 p-4 bg-red-800/10 border border-red-700 rounded-xl">
+    {Object.entries(error).map(([field, message]) => (
+      <p key={field} className="text-red-400">
+        {field.charAt(0).toUpperCase() + field.slice(1)}: {message}
+      </p>
+    ))}
+  </div>
+)}
+
 
     {/* Table */}
     <div className="bg-black border border-gray-700 rounded-xl p-6 overflow-x-auto">

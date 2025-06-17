@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CircleGauge, Edit3, Lock } from 'lucide-react';
+import {  Edit3, Lock } from 'lucide-react';
 import { useMyContext } from '../context/useMyContext';
 import useApi from '../../hooks/infoStudent';
 import { useNavigate, useParams } from 'react-router';
