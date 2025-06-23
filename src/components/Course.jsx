@@ -88,12 +88,23 @@ const CourseManagement = () => {
   return (
     <div className="min-h-screen w-full bg-black text-white flex flex-col items-center justify-start p-4 sm:p-8">
       <div className="w-full max-w-6xl bg-gray-900 border border-gray-700 rounded-2xl shadow-xl p-6 sm:p-10">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl sm:text-5xl font-bold text-white mb-2">
-            Course Management System
-          </h2>
-          <p className="text-gray-400">Add and manage course information</p>
-        </div>
+       <div className="text-center mb-10">
+  <h2 className="text-3xl sm:text-5xl font-bold text-white mb-2">
+    Course Management System
+  </h2>
+  <p className="text-gray-400">Add and manage course information</p>
+
+  {/* ✅ Back to Home Button */}
+  <div className="mt-6">
+    <button
+      onClick={() => navigate('/')}
+      className="px-6 py-3 bg-gray-800 text-white font-semibold border border-gray-600 rounded-lg hover:bg-gray-700 hover:border-gray-500 transition duration-300 ease-in-out cursor-pointer"
+    >
+      🏠 Back to Home
+    </button>
+  </div>
+</div>
+
 
         {/* Add Course Form */}
         <div className="mb-8 space-y-6">
