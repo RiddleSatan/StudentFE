@@ -6,6 +6,8 @@ import { ContextProvider } from './context/Context.jsx';
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import Home from './components/Home';
 import UpdateStudent from './components/UpdateStudent';
+import CourseManagement from './components/Course.jsx';
+import UpdateCourse from './components/UpdateCourse.jsx';
 
 const router = createBrowserRouter([
   {
@@ -19,6 +21,14 @@ const router = createBrowserRouter([
       {
         path: 'update/:id',
         element: <UpdateStudent />
+      },
+      {
+        path: 'courses',
+        element: <CourseManagement />
+      },
+      {
+        path: 'updateCourse/:id',
+        element: <UpdateCourse />
       }
     ]
   }

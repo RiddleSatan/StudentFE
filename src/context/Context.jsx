@@ -11,9 +11,10 @@ export const ContextProvider = ({ children }) => {
     email: "",
     course: "",
     });
+    const [course,setCourse]=useState([])
 
     return (
-        <MyContext.Provider value={{ setValue, value,edit,setEdit }}>
+        <MyContext.Provider value={{ setValue, value,edit,setEdit,setCourse,course }}>
             {children}
         </MyContext.Provider>
     );

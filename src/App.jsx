@@ -12,10 +12,10 @@ import { Bounce, ToastContainer } from 'react-toastify';
 
 function App() {
 
-  const { setValue }= useMyContext();
+  const { setValue,setCourse,course }= useMyContext();
   const {sendRequest}=useApi();
 
-  const handleGlobalState=async ()=>{
+  const handleStudentGlobalList=async ()=>{
     try {
       const response=await sendRequest({ url: "getAll", method: "GET" }) 
             // console.log("The Response",response)
@@ -24,11 +24,24 @@ function App() {
     } catch (error) {
        console.error("API Error:", error);
     }
-
   }
 
+  const handleCourseGlobalList=async ()=>{
+    try {
+      const response=await sendRequest({url:"getAllCourse",method:"GET"})
+      setCourse(response)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+useEffect(() => {
+  console.log("Updated course list:", course);
+}, [course]);
+
+
   useEffect(()=>{
-    handleGlobalState()
+    handleStudentGlobalList();
+    handleCourseGlobalList();
   },[])
   
 //   useEffect(()=>{

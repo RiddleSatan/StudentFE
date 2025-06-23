@@ -19,26 +19,8 @@ const UpdateStudent = () => {
     course: false
   });
 
-  const courseOptions = [
-    { value: "", label: "Select a course" },
-    { value: "Computer Science", label: "Computer Science" },
-    { value: "Software Engineering", label: "Software Engineering" },
-    { value: "Data Science", label: "Data Science" },
-    { value: "Information Technology", label: "Information Technology" },
-    { value: "Cybersecurity", label: "Cybersecurity" },
-    { value: "Web Development", label: "Web Development" },
-    { value: "Mobile App Development", label: "Mobile App Development" },
-    { value: "Artificial Intelligence", label: "Artificial Intelligence" },
-    { value: "Machine Learning", label: "Machine Learning" },
-    { value: "Database Administration", label: "Database Administration" },
-    { value: "Network Administration", label: "Network Administration" },
-    { value: "Digital Marketing", label: "Digital Marketing" },
-    { value: "Graphic Design", label: "Graphic Design" },
-    { value: "UI/UX Design", label: "UI/UX Design" },
-    { value: "Business Administration", label: "Business Administration" },
-    { value: "Project Management", label: "Project Management" },
-    { value: "Other", label: "Other" }
-  ];
+  const { course } = useMyContext();
+
 
   const handleChange = (e) => {
     setEdit((prev)=>({...prev ,[e.target.name]: e.target.value }));
@@ -194,24 +176,30 @@ transition: Bounce,
           <div className="space-y-2">
             <label className="block text-sm font-semibold text-gray-300">Course</label>
             <div className="flex items-center space-x-3">
-              <select
-                name="course"
-                value={edit?.course??''}
-                onChange={handleChange}
-                disabled={!editableFields.course}
-                className={`flex-1 px-4 py-3 rounded-lg border-2 text-white bg-gray-700 transition-all duration-200 ${
-                  editableFields.course 
-                    ? 'border-blue-500 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-200' 
-                    : 'border-gray-600 cursor-not-allowed opacity-75'
-                }`}
-                required
-              >
-                {courseOptions.map((option) => (
-                  <option key={option?.value??''} value={option?.value??''} className="bg-gray-700 text-white">
-                    {option.label}
-                  </option>
-                ))}
-              </select>
+             <select
+  name="course"
+  value={edit?.course ?? ''}
+  onChange={handleChange}
+  disabled={!editableFields.course}
+  className={`flex-1 px-4 py-3 rounded-lg border-2 text-white bg-gray-700 transition-all duration-200 ${
+    editableFields.course 
+      ? 'border-blue-500 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-200' 
+      : 'border-gray-600 cursor-not-allowed opacity-75'
+  }`}
+  required
+>
+  <option value="" className="bg-gray-700 text-white">Select a course</option>
+  {course?.map((option) => (
+    <option 
+      key={option.id} 
+      value={option.courses}
+      className="bg-gray-700 text-white"
+    >
+      {option.courses}
+    </option>
+  ))}
+</select>
+
               <button
                 type="button"
                 onClick={() => toggleEdit('course')}

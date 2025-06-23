@@ -15,30 +15,9 @@ const Home = () => {
   });
   const navigate = useNavigate();
 
-
-  const courseOptions = [
-    { value: "", label: "Select a course" },
-    { value: "Computer Science", label: "Computer Science" },
-    { value: "Software Engineering", label: "Software Engineering" },
-    { value: "Data Science", label: "Data Science" },
-    { value: "Information Technology", label: "Information Technology" },
-    { value: "Cybersecurity", label: "Cybersecurity" },
-    { value: "Web Development", label: "Web Development" },
-    { value: "Mobile App Development", label: "Mobile App Development" },
-    { value: "Artificial Intelligence", label: "Artificial Intelligence" },
-    { value: "Machine Learning", label: "Machine Learning" },
-    { value: "Database Administration", label: "Database Administration" },
-    { value: "Network Administration", label: "Network Administration" },
-    { value: "Digital Marketing", label: "Digital Marketing" },
-    { value: "Graphic Design", label: "Graphic Design" },
-    { value: "UI/UX Design", label: "UI/UX Design" },
-    { value: "Business Administration", label: "Business Administration" },
-    { value: "Project Management", label: "Project Management" },
-    { value: "Other", label: "Other" }
-  ];
-
   const { sendRequest, loading, error } = useApi();
 
+  const {course}=useMyContext();
   useEffect(() => {
     fetchValue();
   }, []);
@@ -93,7 +72,10 @@ const Home = () => {
   const handleEdit=(s)=>{
       setEdit(s);
       navigate(`/update/:${s.id}`)
+  }
 
+  const handleManageCourses = () => {
+    navigate('/courses'); // Navigate to course management page
   }
     
 
@@ -107,6 +89,16 @@ const Home = () => {
         Student Management System
       </h2>
       <p className="text-gray-400">Add and manage student information</p>
+      
+      {/* Course Management Button */}
+      <div className="mt-6">
+        <button
+          onClick={handleManageCourses}
+          className="px-6 py-3 bg-gray-800 text-white font-semibold border border-gray-600 rounded-lg hover:bg-gray-700 hover:border-gray-500 transition duration-300 ease-in-out cursor-pointer"
+        >
+          📚 Manage Courses
+        </button>
+      </div>
     </div>
 
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
@@ -179,13 +171,14 @@ const Home = () => {
           required
           className="w-full p-4 rounded-lg bg-black border border-gray-600 text-white focus:ring-2 focus:ring-white"
         >
-          {courseOptions.map((option) => (
+          <option value="" className="bg-black text-white">Select a course</option>
+          {course?.map((option) => (
             <option 
-              key={option.value} 
-              value={option.value}
+              key={option.id} 
+              value={option.courses}
               className="bg-black text-white"
             >
-              {option.label}
+              {option.courses}
             </option>
           ))}
         </select>
