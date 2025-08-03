@@ -9,7 +9,7 @@ export const ContextProvider = ({ children }) => {
          name: "",
     age: "",
     email: "",
-    course: "",
+    // course: "",
     });
     const [course,setCourse]=useState([])
 

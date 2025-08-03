@@ -24,6 +24,7 @@ const CourseManagement = () => {
 
   const fetchCourse=async ()=>{
      const data = await sendRequest({ url: "getAllCourse", method: "GET" });
+     console.log("these are all the courses:",data);
     if (data) setCourse(data);
   }
 
@@ -47,13 +48,14 @@ const CourseManagement = () => {
   setError(null);
 
   try {
+    console.log("Course name that is added",courseName);
     const response = await sendRequest({
-      url: 'addCourse', // Replace with actual endpoint
+      url: 'addCourse', 
       method: 'POST',
-      body: { courses: courseName.trim() },
+      body: { name: courseName.trim() },
     });
 
-    // Assuming backend returns the new course with an ID
+  
     setCourse(prev => [...prev, response]);
     setCourseName('');
   } catch (err) {
@@ -67,8 +69,13 @@ const CourseManagement = () => {
   const handleDelete = async (courseId) => {
     setLoading(true);
     try {
-      // Simulate API call - replace with your actual API call
-      await new Promise(resolve => setTimeout(resolve, 300));
+      const response= await sendRequest({
+        url:`deleteCourse/${courseId}`,
+        method:'POST',
+      })
+      if(response!=null){
+        fetchCourse();
+      }
       
       setCourse(prev => prev.filter(course => course.id !== courseId));
     } catch (err) {
@@ -165,7 +172,7 @@ const CourseManagement = () => {
                   } border-b border-gray-700`}
                 >
                   <td className="p-3 text-gray-300">{course.id}</td>
-                  <td className="p-3 text-white font-medium">{course.courses}</td>
+                  <td className="p-3 text-white font-medium">{course.name}</td>
                   <td className="p-3 text-center space-x-2">
                     <button
                       onClick={() => handleEdit(course)}

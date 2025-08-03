@@ -30,7 +30,7 @@ const UpdateCourse = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if (!edit.courses?.trim()) {
+    if (!edit.name?.trim()) {
       toast.error('Course name is required!', {
         position: "bottom-right",
         autoClose: 5000,
@@ -46,6 +46,7 @@ const UpdateCourse = () => {
     }
     
     try {
+      console.log("the edited data:",edit)
       const response = await sendRequest({
         url: `updateCourse`, // Adjust URL based on your API
         method: "PUT",
@@ -106,9 +107,9 @@ const UpdateCourse = () => {
             <div className="flex items-center space-x-3">
             <input
   type="text"
-  name="courses" // ✅ THIS is the actual key in your state
+  name="name" // ✅ THIS is the actual key in your state
   placeholder="Enter course name"
-  value={edit?.courses ?? ''}
+  value={edit?.name ?? ''}
   onChange={handleChange}
   disabled={!editableFields.name}
   className={`flex-1 px-4 py-3 rounded-lg border-2 text-white bg-gray-700 transition-all duration-200 ${
@@ -137,7 +138,7 @@ const UpdateCourse = () => {
             <button
               type="submit"
               onClick={handleSubmit}
-              disabled={!editableFields.name || !edit?.courses?.trim()}
+              disabled={!editableFields.name || !edit?.name?.trim()}
               className="w-full py-4 px-6 rounded-lg bg-orange-500 hover:bg-orange-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-bold text-lg transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-orange-200 shadow-lg"
             >
               Update Course Information
