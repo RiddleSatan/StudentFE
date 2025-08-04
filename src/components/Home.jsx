@@ -2,6 +2,7 @@ import  { useEffect, useState } from "react";
 import useApi from "../../hooks/infoStudent.js"; // adjust path if needed
 import { useMyContext } from "../context/useMyContext.js";
 import { useNavigate } from "react-router";
+import StatusPage from "./StatusPage.jsx";
 
 const Home = () => {
   // const [students, setStudents] = useState([]);
@@ -89,7 +90,7 @@ const Home = () => {
         Student Management System
       </h2>
       <p className="text-gray-400">Add and manage student information</p>
-      
+      <StatusPage/>
       {/* Course Management Button */}
       <div className="mt-6">
         <button
@@ -162,27 +163,30 @@ const Home = () => {
       </div>
 
       {/* Course */}
-      <div className="space-y-2">
-        <label className="text-sm font-medium text-gray-300">Course</label>
-        <select
-          name="course"
-          value={student.course}
-          onChange={handleChange}
-          required
-          className="w-full p-4 rounded-lg bg-black border border-gray-600 text-white focus:ring-2 focus:ring-white"
-        >
-          <option value="" className="bg-black text-white">Select a course</option>
-          {course?.map((option) => (
-            <option 
-              key={option.id} 
-              value={option.courses}
-              className="bg-black text-white"
-            >
-              {option.courses}
-            </option>
-          ))}
-        </select>
-      </div>
+     <div className="space-y-2">
+  <label className="text-sm font-medium text-gray-300">Course</label>
+  <select
+    name="course"
+    value={student.course}
+    onChange={handleChange}
+    required
+    className="w-full p-4 rounded-lg bg-black border border-gray-600 text-white focus:ring-2 focus:ring-white"
+  >
+    <option value="" disabled hidden>
+      Select a course
+    </option>
+    {course?.map((option) => (
+      <option 
+        key={option.id} 
+        value={option.name}
+        className="bg-black text-white"
+      >
+        {option.name}
+      </option>
+    ))}
+  </select>
+</div>
+
 
       {/* Submit Button */}
       <div className="sm:col-span-2">
@@ -226,7 +230,7 @@ const Home = () => {
             <th className="p-3">Name</th>
             <th className="p-3">Email</th>
             <th className="p-3">Age</th>
-            <th className="p-3">Course</th>
+            <th className="p-3">Course_ID</th>
             <th className="p-3 text-center">Actions</th>
           </tr>
         </thead>
@@ -244,7 +248,7 @@ const Home = () => {
               <td className="p-3 text-gray-300">{s.age}</td>
               <td className="p-3">
                 <span className="px-2 py-1 bg-gray-700 text-white rounded">
-                  {s.course}
+                  {s.id}
                 </span>
               </td>
               <td className="p-3 text-center space-x-2">
@@ -276,6 +280,7 @@ const Home = () => {
       </table>
     </div>
   </div>
+ 
 </div>
 
   );

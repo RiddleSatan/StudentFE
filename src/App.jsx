@@ -10,6 +10,7 @@ import { Outlet } from "react-router";
 import { Bounce, ToastContainer } from 'react-toastify';
 
 
+
 function App() {
 
   const { setValue,setCourse,course }= useMyContext();
@@ -52,6 +53,7 @@ useEffect(() => {
   return (
     <>
    <Outlet/>
+   
    <ToastContainer
 position="bottom-right"
 autoClose={5000}
