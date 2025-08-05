@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Edit3, Lock } from 'lucide-react';
 import { useMyContext } from '../context/useMyContext';
 import useApi from '../../hooks/infoStudent';
@@ -11,7 +11,7 @@ const UpdateCourse = () => {
   const { id } = useParams();
   console.log("Course ID:", id);
   const navigate = useNavigate();
-
+  const initialName=useRef(edit?.name);
   const [editableFields, setEditableFields] = useState({
     name: false
   });
@@ -155,10 +155,10 @@ const UpdateCourse = () => {
         </div>
 
         <div className="mt-8 p-4 bg-gray-700 rounded-lg border border-gray-600">
-          <h3 className="font-semibold text-gray-300 mb-2">Current Values:</h3>
+          <h3 className="font-semibold text-gray-300 mb-2">Current Name:{initialName.current}</h3>
           <div className="text-sm text-gray-400 space-y-1">
             <p><span className="font-medium text-gray-300">Course ID:</span> {edit?.id}</p>
-            <p><span className="font-medium text-gray-300">Course Name:</span> {edit?.courses}</p>
+            <p><span className="font-medium text-gray-300">Updated Name:</span> {edit?.name}</p>
             <p className="text-xs text-gray-500 mt-2">
               Click the edit icon to modify the course name
             </p>

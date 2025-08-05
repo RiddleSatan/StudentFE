@@ -13,7 +13,7 @@ const StatusPage = () => {
       try {
         const [studentRes, courseRes] = await Promise.all([
           axios.get("http://localhost:8080/actuator/health"),
-        //   axios.get("http://localhost:8082/actuator/health"),
+          axios.get("http://localhost:8082/actuator/health"),
         ]);
 
         setServices({
